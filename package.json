@@ -1,0 +1,45 @@
+{
+  "name": "reactjs-webpack",
+  "version": "1.0.0",
+  "description": "ReactJS Webpack demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "lint": "eslint --ext .tsx --ext .ts src/",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
+  },
+  "author": "Serhii Parkhomenko",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/react": "^18.0.27",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "babel-loader": "^9.1.2",
+    "eslint": "^8.33.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}
