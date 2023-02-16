@@ -1,0 +1,41 @@
+.filter {
+    display: flex;
+    flex-flow: row wrap;
+    border-bottom: 2px solid #424242;
+    padding: 20px 0 0 0;
+}
+
+.filter li {
+    display: inline-block;
+    margin: 0 1.875em 0 0;    
+}
+
+.filter a {
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    position: relative;
+    padding: .5em 0
+  }
+
+.filter a:hover {
+    cursor: pointer;;
+}
+
+.filter a::before {
+    transition: 300ms;
+    height: 3px;
+    content: "";
+    position: absolute;
+    background-color: #F65261;
+} 
+
+ .filter a.link::before {
+    height: 0%;
+    width: 100%;
+    bottom: -2px;
+  }
+  
+  .filter a.link:hover::before {
+    height: 3px;
+  }

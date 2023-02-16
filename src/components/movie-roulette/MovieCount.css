@@ -1,0 +1,11 @@
+.movieCount {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: left;
+    padding: 27px 0 27px 0;
+}
+
+.movieCount span.bold {
+    font-weight: 600;
+}

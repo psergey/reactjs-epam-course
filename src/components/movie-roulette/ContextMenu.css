@@ -1,0 +1,17 @@
+.context-menu {
+    border-radius: 50%;
+    border: 0;
+    justify-content: space-around;
+    background: #2A202D;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    cursor: pointer;
+}
+
+.context-menu .icon {
+    margin-top: 6px;
+}
