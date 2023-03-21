@@ -1,0 +1,31 @@
+@value colors: "../../styles/colors.css";
+@value pink from colors;
+
+button.search {
+    background: pink;
+    height: 57px;
+    min-width: 233px;
+    text-transform: capitalize;
+    border: 0px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+input.search {
+    height: 57px;
+    width: 713px;
+    background: rgba(50, 50, 50, 0.8);
+    border: 0px;
+    border-radius: 4px;    
+    margin: 0 14px 0 0;
+    padding: 0 0 0 19px;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 24px;
+}

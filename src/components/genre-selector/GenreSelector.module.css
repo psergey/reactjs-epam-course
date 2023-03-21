@@ -1,0 +1,49 @@
+@value colors: "../../styles/colors.css";
+@value white, pink from colors;
+
+ul.selector {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+button.link {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    height: 100%;
+}
+
+button.link.selected {
+    color: pink;
+} 
+
+span.selected {
+    border-bottom: 3px solid pink;
+    margin-top: 30px;
+    position: absolute;
+    /*bottom: -1px;*/
+    left: 0px;
+    right: 0px;
+}
+
+ul.selector li {
+    cursor: pointer;
+    list-style-type: none;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    margin-right: 30px;
+    position: relative;
+    height: 100%;
+}
