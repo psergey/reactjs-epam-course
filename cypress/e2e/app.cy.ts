@@ -16,14 +16,14 @@ describe('Home page', () => {
   });
 
   it('genre selector highlights selected link', () => {
-    cy.get('li[data-cy=genre-link]').find('span[class*=selected]').should('have.length', 1);
-    cy.get('li[data-cy=genre-link]')
+    cy.findAllByTestId('genre-link').find('span[class*=selected]').should('have.length', 1);
+    cy.findAllByTestId('genre-link')
       .find('span[class*=selected]')
       .first()
       .parent()
       .then($button => {
         const initialSelection = $button.text();
-        const element = cy.get('li[data-cy=genre-link]').find('span').not('span[class*=selected]').first().parent();
+        const element = cy.findAllByTestId('genre-link').find('span').not('span[class*=selected]').first().parent();
 
         element.click();
 
