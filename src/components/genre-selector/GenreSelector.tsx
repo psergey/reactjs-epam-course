@@ -18,7 +18,7 @@ const GenreSelector: FC<GenreSelectorProps> = ({ genres, currentGenre, onSelecte
   return (
     <ul className={styles.selector}>
       {genres.map(item => (
-        <li key={item}>
+        <li key={item} data-cy="genre-link">
           <button className={styles.link} onClick={() => onClickHandlder(item)}>
             {item}
             <span className={selectedGenre === item ? `${styles.selected}` : ''}></span>
