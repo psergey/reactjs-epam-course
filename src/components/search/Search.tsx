@@ -2,12 +2,12 @@ import { FC, ReactElement, useState } from 'react';
 import styles from './Search.module.css';
 
 interface SearchProps {
-  query: string;
+  query?: string;
   onSearch(searchQuery: string): void;
 }
 
 const Search: FC<SearchProps> = ({ query, onSearch }): ReactElement => {
-  const [searchQuery, setSearchQuery] = useState(query);
+  const [searchQuery, setSearchQuery] = useState(query === undefined ? '' : query);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.currentTarget.value);
