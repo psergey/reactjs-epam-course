@@ -1,0 +1,70 @@
+@value colors: "../../styles/colors.css";
+@value dark, white, gray, pink from colors;
+
+button.menu {
+  border-radius: 50%;
+  max-height: 42px;
+  max-width: 42px;
+  min-height: 36px;
+  min-width: 36px;
+  background: #2a202d;
+  cursor: pointer;
+  border: 0;
+}
+
+button.menu:hover {
+  box-shadow: gray 0 0 0 1px inset;
+  outline: none;
+}
+
+button.menu .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu {
+  list-style-type: none;
+  border-radius: 4px;
+  display: block;
+  background: dark;
+  color: white;
+  padding: 0;
+  min-width: 190px;
+}
+
+.menu li {
+  display: block;
+  opacity: 0.8;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 30px 10px 23px;
+}
+
+.menu li.close {
+  cursor: default;
+  padding: 7px 7px 0 0;
+  text-align: right;
+}
+
+li.close button {
+  color: white;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  min-width: 12px;
+  max-width: 12px;
+  max-height: 12px;
+  min-height: 12px;
+  margin: 0 7px 0 0;
+}
+
+li.close button svg {
+  width: 12px;
+  height: 12px;
+}
+
+.menu li:not(.close):hover {
+  background: pink;
+}
