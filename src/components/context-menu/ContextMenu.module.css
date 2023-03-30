@@ -7,7 +7,7 @@ button.menu {
   max-width: 42px;
   min-height: 36px;
   min-width: 36px;
-  background: #2a202d;
+  background: dark;
   cursor: pointer;
   border: 0;
 }
