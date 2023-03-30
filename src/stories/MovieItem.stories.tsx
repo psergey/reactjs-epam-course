@@ -24,7 +24,7 @@ const Template: ComponentStory<typeof MovieItem> = args => (
 export const MovieCard = Template.bind({});
 MovieCard.args = {
   name: 'Pulp Fiction',
-  releaseYear: 2004,
+  releaseYear: 1994,
   posterUrl: 'https://www.miramax.com/assets/Pulp-Fiction1.png',
   genres: ['Action & Adventure ']
 };

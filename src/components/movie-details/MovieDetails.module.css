@@ -1,0 +1,68 @@
+@value colors: "../../styles/colors.css";
+@value white, pink from colors;
+
+.container {
+  align-items: flex-start;
+  display: flex;
+  font-weight: 300;
+  color: white;
+}
+
+.poster {
+  padding-right: 60px;
+}
+
+.poster img {
+  height: 486px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  width: 34em;
+}
+
+.firstLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.name {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 49px;
+  text-transform: uppercase;
+  margin-right: 30px;
+}
+
+.rating {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.rating > span {
+  font-size: 20px;
+  line-height: 24px;
+  vertical-align: middle;
+}
+
+.time {
+  font-size: 24px;
+  line-height: 29px;
+  color: pink;
+  padding: 29px 0 29px 0;
+}
+
+.time span:first-child {
+  padding-right: 50px;
+}
+
+.opacity {
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
