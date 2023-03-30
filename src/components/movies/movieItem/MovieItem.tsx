@@ -1,5 +1,5 @@
-import { FC, ReactElement, useRef } from 'react';
-import ContextMenu, { ContextMenuType } from '../../context-menu/ContextMenu';
+import { FC, ReactElement, useState } from 'react';
+import ContextMenu from '../../context-menu/ContextMenu';
 import styles from './MovieItem.module.css';
 
 interface MovieProps {
@@ -12,7 +12,11 @@ interface MovieProps {
 }
 
 const MovieItem: FC<MovieProps> = ({ id, name, posterUrl, releaseYear, genres, onClick }): ReactElement => {
-  const inputRef = useRef<ContextMenuType>(null);
+  //const inputRef = useRef<ContextMenuType>(null);
+  const [isContextMenuOpened, setContextMenuOpened] = useState(false);
+  const onOpenChangedHandler = () => {
+    setContextMenuOpened(prev => !prev);
+  };
 
   return (
     <div
@@ -20,13 +24,14 @@ const MovieItem: FC<MovieProps> = ({ id, name, posterUrl, releaseYear, genres, o
       role="button"
       onClick={() => onClick(id)}
       onMouseLeave={() => {
-        inputRef.current && inputRef.current.closeMenu();
+        //inputRef.current && inputRef.current.closeMenu();
+        setContextMenuOpened(false);
         console.log('Mouse Leave');
       }}>
       <div className={styles.poster}>
         <img src={posterUrl} alt={name}></img>
         <span className={styles.menu}>
-          <ContextMenu ref={inputRef}></ContextMenu>
+          <ContextMenu onOpenChanged={onOpenChangedHandler} isOpen={isContextMenuOpened}></ContextMenu>
         </span>
       </div>
       <div className={styles.meta}>
