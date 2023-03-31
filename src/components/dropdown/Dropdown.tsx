@@ -9,7 +9,7 @@ interface DropdownProps {
 
 const Dropdown: FC<DropdownProps> = ({ elements, selected, onSelected }): ReactElement => {
   const [isOpen, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(selected);
+  const [selectedItem, setSelectedItem] = useState(elements.find(item => item === selected));
 
   const onClickHandlder = () => {
     setOpen(prev => !prev);
