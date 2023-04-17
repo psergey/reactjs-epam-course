@@ -1,0 +1,59 @@
+@value colors: "../../../styles/colors.css";
+@value dark, white from colors;
+
+.backdrop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-color: rgba(35, 35, 35, 0.918051);
+  opacity: 0.89;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: dark;
+  transform: translate(-50%, -50%);
+  padding: 0px 60px 60px 60px;
+}
+
+.title {
+  color: white;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 49px;
+  height: 150px;
+}
+
+.title p {
+  text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 150px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+button.close {
+  color: white;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  min-width: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  min-height: 28px;
+  margin: 0 7px 0 0;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+button.close svg {
+  width: 28px;
+  height: 28px;
+}

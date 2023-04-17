@@ -1,0 +1,96 @@
+@value colors: "../../../styles/colors.css";
+@value pink, dark from colors;
+
+.form input,
+textarea {
+  background: rgba(50, 50, 50, 0.8);
+  border: 0px;
+  border-radius: 4px;
+  margin: 0 14px 0 0;
+  padding: 0 0 0 19px;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 24px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form input {
+  height: 57px;
+}
+
+.form textarea {
+  height: 197px;
+  resize: none;
+}
+
+.form label {
+  color: pink;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  margin-bottom: 13px;
+  display: block;
+}
+
+.form button {
+  height: 57px;
+  min-width: 180px;
+  text-transform: capitalize;
+  border: 0px;
+  border-radius: 4px;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.form button[type='submit'] {
+  background: pink;
+  color: #ffffff;
+}
+
+.form button[type='reset'] {
+  background: dark;
+  color: pink;
+  border: 1.5px solid pink;
+}
+
+.form .description {
+  width: 100%;
+}
+
+.form .actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+}
+
+.form .actions > button[type='reset'] {
+  margin-right: 13px;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.column,
+.column-long {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.column-long {
+  flex: 2 1;
+  margin-right: 30px;
+}
