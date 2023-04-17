@@ -18,7 +18,7 @@ const ContextMenu: FC<ContextMenuProps> = ({ isOpen = false, onOpenChanged }): R
   return (
     <>
       {!isOpen && (
-        <button role="button" className={styles.menu} onClick={e => onMenuClickHandler(e)}>
+        <button role="button" className={styles.menu} onClick={onMenuClickHandler}>
           <span className={styles.icon}>
             <ContextMenuIcon></ContextMenuIcon>
           </span>
@@ -27,7 +27,7 @@ const ContextMenu: FC<ContextMenuProps> = ({ isOpen = false, onOpenChanged }): R
       {isOpen && (
         <ul className={styles.menu}>
           <li className={styles.close}>
-            <button onClick={e => onMenuClickHandler(e)}>
+            <button onClick={onMenuClickHandler}>
               <svg
                 width="15"
                 height="15"
