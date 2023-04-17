@@ -1,0 +1,60 @@
+@value colors: "../../../styles/colors.css";
+@value white from colors;
+
+.container {
+  height: 100%;
+  cursor: pointer;
+}
+
+.poster {
+  position: relative;
+}
+
+.poster img {
+  width: 100%;
+  display: block;
+}
+
+.poster .menu {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  position: absolute;
+  right: 14px;
+  top: 16px;
+}
+
+.container:hover .menu {
+  opacity: 1;
+}
+
+.meta {
+  mix-blend-mode: normal;
+  font-weight: 500;
+  color: white;
+}
+
+.first-line {
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0 8px 0;
+}
+
+.first-line .name {
+  font-size: 18px;
+}
+
+.genres {
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+.year {
+  border-radius: 4px;
+  border: solid 1px #979797;
+  opacity: 0.5;
+  padding: 4px 8px;
+}

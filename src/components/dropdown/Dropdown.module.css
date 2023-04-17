@@ -1,0 +1,114 @@
+@value colors: "../../styles/colors.css";
+@value white, pink from colors;
+
+.container {
+  position: relative;
+  user-select: none;
+  width: 100%;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /*border-width: 0 2px 0 2px;
+  border-style: solid;
+  border-color: #394a6d;*/
+}
+
+.toggler {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  height: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 0.88px;
+}
+
+.item {
+  position: relative;
+  display: block;
+  padding: 10px 0 10px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  line-height: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.5s;
+}
+
+.item:hover {
+  cursor: pointer;
+  background-color: pink;
+}
+
+.arrow {
+  position: relative;
+  height: 10px;
+  width: 10px;
+}
+
+.arrow::before {
+  content: '';
+  position: absolute;
+  /* right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  border: 5px solid;
+  border-top-color: rgba(0, 0, 0, 1);
+  border-left-color: rgba(0, 0, 0, 1);
+  margin-top: -2.5px;
+  background-color: rgba(0, 0, 0, 1);
+  transition: all ease-in-out 0.2s; */
+  bottom: 0px;
+
+  width: 0px;
+  height: 0px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid pink;
+}
+
+.open .arrow::before {
+  transform: rotate(180deg);
+}
+
+/* 
+.arrow::before,
+.arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  width: 0.15rem;
+  height: 100%;
+}
+
+.arrow::before {
+  left: -3px;
+  transform: rotate(-45deg);
+  background-color: pink;
+}
+
+.arrow::after {
+  left: 3px;
+  transform: rotate(45deg);
+  background-color: pink;
+}
+
+.open .arrow::before {
+  left: -3px;
+  transform: rotate(45deg);
+}
+
+.open .arrow::after {
+  left: 3px;
+  transform: rotate(-45deg);
+} */

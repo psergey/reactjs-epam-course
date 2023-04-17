@@ -1,0 +1,23 @@
+@value colors: "../../styles/colors.css";
+@value white from colors;
+
+.container {
+  display: flex;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.88px;
+}
+
+.text {
+  width: 10rem;
+  color: white;
+  cursor: default;
+  text-transform: uppercase;
+  mix-blend-mode: normal;
+  opacity: 0.6;
+}
+
+.dropdown {
+  width: 15rem;
+}
