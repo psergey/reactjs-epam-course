@@ -16,7 +16,7 @@ interface MovieItem {
 const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(Object.fromEntries(new FormData(e.target as HTMLFormElement)));
+    //console.log(Object.fromEntries(new FormData(e.target as HTMLFormElement)));
 
     props.onSubmit();
   };
