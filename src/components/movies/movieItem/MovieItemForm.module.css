@@ -73,6 +73,24 @@ textarea {
   margin-right: 13px;
 }
 
+.form .select-wrapper {
+  background: rgba(50, 50, 50, 0.8);
+  border: 0px;
+  border-radius: 4px;
+  padding: 0 0 0 19px;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 57px;
+}
+
+.form .select ul {
+  background: rgba(35, 35, 35, 0.918051);
+  top: 57px;
+}
+
 .group {
   display: flex;
   flex-direction: row;

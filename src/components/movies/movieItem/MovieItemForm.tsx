@@ -1,5 +1,6 @@
-import React, { FC, FormEvent, FormEventHandler, ReactElement } from 'react';
+import React, { FC, FormEvent, FormEventHandler, ReactElement, useState } from 'react';
 import styles from './MovieItemForm.module.css';
+import MultiSelectDropdown from '../../dropdown/MultiSelectDropdown';
 
 interface MovieItem {
   name?: string;
@@ -14,11 +15,30 @@ interface MovieItem {
 }
 
 const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     //console.log(Object.fromEntries(new FormData(e.target as HTMLFormElement)));
 
     props.onSubmit();
+  };
+
+  const onFormResetHandler = () => {
+    setSelectedGenres([]);
+  };
+
+  const onGenreSelectedHandler = (item: string) => {
+    setSelectedGenres(prev => {
+      console.log(item);
+      const items = [...prev];
+      if (items.includes(item)) {
+        return items.filter(el => el !== item);
+      } else {
+        items.push(item);
+        return items;
+      }
+    });
   };
 
   return (
@@ -65,8 +85,13 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
       <div className={styles.group}>
         <div className={styles['column-long']}>
           <label>Genre</label>
-          <div>
-            <input></input>
+          <div className={styles.select}>
+            <MultiSelectDropdown
+              placeholder="Select Genre"
+              selectorClassName={styles['select-wrapper']}
+              elements={['Crime', 'Documentary', 'Horror', 'Comedy']}
+              selected={selectedGenres}
+              onSelected={onGenreSelectedHandler}></MultiSelectDropdown>
           </div>
         </div>
         <div className={styles.column}>
@@ -85,7 +110,9 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
         </div>
       </div>
       <div className={styles.actions}>
-        <button type="reset">Reset</button>
+        <button type="reset" onClick={onFormResetHandler}>
+          Reset
+        </button>
         <button type="submit">Submit</button>
       </div>
     </form>
