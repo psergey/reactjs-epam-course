@@ -8,8 +8,6 @@ interface ContextMenuProps {
 }
 
 const ContextMenu: FC<ContextMenuProps> = ({ isOpen = false, onOpenChanged }): ReactElement => {
-  console.log('ContextMenu render');
-
   const onMenuClickHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     onOpenChanged();
