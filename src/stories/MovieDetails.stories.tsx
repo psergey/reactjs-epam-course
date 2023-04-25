@@ -28,8 +28,8 @@ const TemplateBig: ComponentStory<typeof MovieDetails> = args => (
 
 export const MovieInfo = Template.bind({});
 MovieInfo.args = {
-  name: 'Pulp Fiction',
-  releaseYear: 1994,
+  title: 'Pulp Fiction',
+  releaseDate: new Date(1994, 9, 14),
   rating: 8.9,
   duration: 154,
   posterUrl: 'https://www.miramax.com/assets/Pulp-Fiction1.png',

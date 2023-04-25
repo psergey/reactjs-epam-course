@@ -6,6 +6,7 @@
   display: flex;
   font-weight: 300;
   color: white;
+  text-align: left;
 }
 
 .poster {
@@ -14,12 +15,13 @@
 
 .poster img {
   height: 486px;
+  aspect-ratio: 2/3;
 }
 
 .meta {
   display: flex;
   flex-direction: column;
-  width: 34em;
+  min-width: 34em;
 }
 
 .firstLine {

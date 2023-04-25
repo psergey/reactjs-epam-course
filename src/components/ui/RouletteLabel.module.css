@@ -1,0 +1,9 @@
+@value colors: "../../styles/colors.css";
+@value pink from colors;
+
+.roulette-label,
+.roulette-label * {
+  color: pink;
+  font-size: 20px;
+  line-height: 24px;
+}
