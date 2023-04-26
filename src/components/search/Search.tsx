@@ -25,9 +25,9 @@ const Search: FC<SearchProps> = ({ query, onSearch }): ReactElement => {
         placeholder="What do you want to watch?"
         className={styles.search}
         value={searchQuery}
-        onChange={event => onChangeHandler(event)}
+        onChange={onChangeHandler}
         onBlur={() => onSearch(searchQuery)}
-        onKeyDown={event => onKeyPressedHandler(event)}
+        onKeyDown={onKeyPressedHandler}
       />
       <button className={styles.search} onClick={() => onSearch(searchQuery)}>
         Search

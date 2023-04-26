@@ -1,20 +1,21 @@
 import { FC, ReactElement } from 'react';
+import noPoster from '../../assets/no-poster.jpeg';
 import styles from './MovieDetails.module.css';
 
 interface MovieDetailsProps {
-  name: string;
+  title: string;
   posterUrl: string;
-  releaseYear: number;
+  releaseDate?: Date;
   duration: number;
-  rating: number;
+  rating?: number;
   description: string;
   genres: string[];
 }
 
 const MovieDetails: FC<MovieDetailsProps> = ({
-  name,
+  title,
   posterUrl,
-  releaseYear,
+  releaseDate,
   duration,
   rating,
   description,
@@ -23,20 +24,20 @@ const MovieDetails: FC<MovieDetailsProps> = ({
   const durationText = `${Math.floor(duration / 60)}h ${duration % 60}m`;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="movie-details">
       <div className={styles.poster}>
-        <img src={posterUrl} alt={name}></img>
+        <img src={posterUrl} alt={title} onError={e => (e.currentTarget.src = noPoster)}></img>
       </div>
       <div className={styles.meta}>
         <div className={styles.firstLine}>
-          <span className={styles.name}>{name}</span>
+          <span className={styles.name}>{title}</span>
           <div className={styles.rating}>
-            <span>{rating}</span>
+            <span>{rating ?? 'N/A'}</span>
           </div>
         </div>
         <div className={`${styles.opacity}`}>{genres.slice(0, 3).join(', ')}</div>
         <div className={styles.time}>
-          <span>{releaseYear}</span>
+          <span>{releaseDate?.getFullYear() ?? 'N/A'}</span>
           <span>{durationText}</span>
         </div>
         <div className={`${styles.opacity}`}>{description}</div>

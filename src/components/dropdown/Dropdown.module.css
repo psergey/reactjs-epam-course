@@ -43,6 +43,7 @@
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.5s;
+  text-align: left;
 }
 
 .item:hover {
@@ -61,11 +62,12 @@
   text-transform: none;
 }
 
-ul {
+.container ul {
   position: absolute;
   left: 0;
   width: 100%;
   top: 20px;
+  z-index: 1;
   max-height: 250px;
   overflow: hidden auto;
 }

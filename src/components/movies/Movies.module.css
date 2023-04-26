@@ -1,0 +1,16 @@
+.movies {
+  grid-gap: 1em;
+  align-items: stretch;
+  display: grid;
+  justify-items: stretch;
+}
+
+/* .movies .movie {
+  width: 400px;
+} */
+
+@media (min-aspect-ratio: 7 / 9) {
+  .movies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

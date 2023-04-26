@@ -12,7 +12,9 @@
 
 .poster img {
   width: 100%;
+  margin: 0 0 14px 0;
   display: block;
+  aspect-ratio: 2/3;
 }
 
 .poster .menu {
@@ -50,6 +52,7 @@
 .genres {
   opacity: 0.5;
   font-size: 14px;
+  text-align: left;
 }
 
 .year {
