@@ -73,37 +73,6 @@ const Root: FC = (): ReactElement => {
     <div className={styles.App}>
       <div className={styles.content}>
         <header>
-          {/* {!movie && (
-            <div className={styles.search}>
-              <div className={styles.header}>
-                <div className={styles['top-row']}>
-                  <RouletteLabel />
-                  <button className={styles.addMovie}>+ Add Movie</button>
-                </div>
-                <div className={styles['search-row']}>
-                  <div>
-                    <span className={styles['search-label']}>Find your movie</span>
-                  </div>
-                  <div>
-                    <Search query={search} onSearch={onSearchMovieHandler}></Search>{' '}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-          {movie && (
-            <div className={styles.details}>
-              <div className={styles['top-row']}>
-                <RouletteLabel />
-                <button className={styles.search} onClick={() => selectMovie(undefined)}>
-                  <span></span>
-                </button>
-              </div>
-              <div className={styles.details}>
-                <MovieDetails {...movie}></MovieDetails>
-              </div>
-            </div>
-          )} */}
           <Outlet
             context={
               {
@@ -136,18 +105,6 @@ const Root: FC = (): ReactElement => {
           <RouletteLabel></RouletteLabel>
         </footer>
       </div>
-
-      {/* <Counter start={10} />
-
-      <Search query="Find" onSearch={(value: string) => console.log(value)} />
-
-      <div className="genreSelection">
-        <GenreSelector
-          genres={genres}
-          currentGenre="Documentary"
-          onSelected={(selected: string) => console.log(selected)}
-        />
-      </div> */}
     </div>
   );
 };
