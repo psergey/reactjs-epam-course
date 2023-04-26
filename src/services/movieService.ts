@@ -59,3 +59,19 @@ export const getMovies = async (query: MovieQuery): Promise<PageResponse<Movie>>
     data: movies
   };
 };
+
+export const getMovie = async (id: string): Promise<Movie> => {
+  const response = await axios.get<MovieResponse>(`http://localhost:4000/movies/${id}`);
+  const item = response.data;
+
+  return {
+    id: item.id,
+    title: item.title,
+    posterUrl: item.poster_path,
+    releaseDate: item.release_date ? new Date(item.release_date) : undefined,
+    rating: item.vote_average,
+    duration: item.runtime,
+    description: item.overview,
+    genres: item.genres
+  } as Movie;
+};

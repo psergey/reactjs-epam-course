@@ -21,7 +21,7 @@ const GenreSelector: FC<GenreSelectorProps> = ({ genres, currentGenre, onSelecte
         <li key={item} data-testid="genre-link">
           <button className={styles.link} onClick={() => onClickHandlder(item)}>
             {item}
-            <span className={selectedGenre === item ? `${styles.selected}` : ''}></span>
+            <span className={selectedGenre.toLowerCase() === item.toLowerCase() ? `${styles.selected}` : ''}></span>
           </button>
         </li>
       ))}
