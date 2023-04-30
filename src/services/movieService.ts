@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Movie } from '../models/movie';
+import { environment } from '../.env/environment';
 import { PageResponse, SearchBy, SortBy, SortOrder } from '../models/api';
 
 export type MovieQuery = {
@@ -28,6 +29,10 @@ type MovieResponse = {
   genres: string[];
 };
 
+const movieApiClient = axios.create({
+  baseURL: environment.movieApi
+});
+
 export const getMovies = async (query: MovieQuery): Promise<PageResponse<Movie>> => {
   const filter: MovieQueryParams = {
     searchBy: query.searchBy,
@@ -37,7 +42,7 @@ export const getMovies = async (query: MovieQuery): Promise<PageResponse<Movie>>
     sortOrder: 'asc'
   };
 
-  const response = await axios.get<PageResponse<MovieResponse>>('http://localhost:4000/movies', {
+  const response = await movieApiClient.get<PageResponse<MovieResponse>>(`/movies`, {
     params: filter
   });
 
@@ -58,4 +63,20 @@ export const getMovies = async (query: MovieQuery): Promise<PageResponse<Movie>>
     ...response.data,
     data: movies
   };
+};
+
+export const getMovie = async (id: string): Promise<Movie> => {
+  const response = await movieApiClient.get<MovieResponse>(`/movies/${id}`);
+  const item = response.data;
+
+  return {
+    id: item.id,
+    title: item.title,
+    posterUrl: item.poster_path,
+    releaseDate: item.release_date ? new Date(item.release_date) : undefined,
+    rating: item.vote_average,
+    duration: item.runtime,
+    description: item.overview,
+    genres: item.genres
+  } as Movie;
 };
