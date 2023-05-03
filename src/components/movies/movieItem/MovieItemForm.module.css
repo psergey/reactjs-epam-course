@@ -111,3 +111,9 @@ textarea {
   flex: 2 1;
   margin-right: 30px;
 }
+
+.error {
+  color: pink;
+  font-size: 14px;
+  padding-top: 5px;
+}

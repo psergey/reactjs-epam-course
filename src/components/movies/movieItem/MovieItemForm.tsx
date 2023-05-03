@@ -1,6 +1,15 @@
-import React, { FC, FormEvent, FormEventHandler, ReactElement, useState } from 'react';
+import ReactDOM, { FC, FormEvent, FormEventHandler, ReactElement, useState } from 'react';
+import {
+  useForm,
+  Controller,
+  ControllerFieldState,
+  ControllerRenderProps,
+  FieldValues,
+  UseFormStateReturn
+} from 'react-hook-form';
 import styles from './MovieItemForm.module.css';
 import MultiSelectDropdown from '../../dropdown/MultiSelectDropdown';
+import { Movie } from '../../../models/movie';
 
 interface MovieItem {
   name?: string;
@@ -11,26 +20,47 @@ interface MovieItem {
   description?: string;
   genre?: string;
   genres?: string[];
-  onSubmit(): void;
+  onSubmit(movie: Partial<Movie>): void;
+}
+
+interface IFormInput {
+  title: string;
+  posterUrl: string;
+  releaseDate?: Date;
+  duration: number;
+  rating?: number;
+  genres: string[];
+  description: string;
 }
 
 const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors }
+  } = useForm<IFormInput>({ defaultValues: { genres: [] } });
 
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     //console.log(Object.fromEntries(new FormData(e.target as HTMLFormElement)));
 
-    props.onSubmit();
+    //props.onSubmit();
+  };
+
+  const onFormSubmit = (data: IFormInput): void => {
+    props.onSubmit(data);
   };
 
   const onFormResetHandler = () => {
     setSelectedGenres([]);
+    reset();
   };
 
   const onGenreSelectedHandler = (item: string) => {
     setSelectedGenres(prev => {
-      console.log(item);
       const items = [...prev];
       if (items.includes(item)) {
         return items.filter(el => el !== item);
@@ -42,12 +72,13 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
   };
 
   return (
-    <form onSubmit={onSubmit} className={styles.form}>
+    <form onSubmit={handleSubmit(onFormSubmit)} className={styles.form}>
       <div className={styles.group}>
         <div className={styles['column-long']}>
           <label>Title</label>
           <div>
-            <input defaultValue={props.name} type="text" name="name" placeholder="Title"></input>
+            <input defaultValue={props.name} placeholder="Title" {...register('title', { required: true })}></input>
+            {errors.title?.type === 'required' && <p className={styles.error}>Title is required.</p>}
           </div>
         </div>
         <div className={styles.column}>
@@ -56,8 +87,8 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
             <input
               defaultValue={props.releaseDate?.toJSON().split('T', 1)[0]}
               type="date"
-              name="releaseDate"
-              placeholder="Select Date"></input>
+              placeholder="Select Date"
+              {...register('releaseDate')}></input>
           </div>
         </div>
       </div>
@@ -65,7 +96,11 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
         <div className={styles['column-long']}>
           <label>Movie Url</label>
           <div>
-            <input defaultValue={props.posterUrl} name="posterUrl" placeholder="https://"></input>
+            <input
+              defaultValue={props.posterUrl}
+              placeholder="https://"
+              {...register('posterUrl', { required: true })}></input>
+            {errors.posterUrl?.type === 'required' && <p className={styles.error}>Poster is required.</p>}
           </div>
         </div>
         <div className={styles.column}>
@@ -74,11 +109,14 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
             <input
               defaultValue={props.rating}
               type="number"
-              min={0}
-              max={10}
+              // min={0}
+              // max={10}
               step={0.1}
-              name="rating"
-              placeholder="Rating"></input>
+              placeholder="Rating"
+              {...register('rating', { min: 0, max: 10 })}></input>
+            {(errors.rating?.type === 'min' || errors.rating?.type === 'max') && (
+              <p className={styles.error}>Rating should be between 0 and 10.</p>
+            )}
           </div>
         </div>
       </div>
@@ -86,18 +124,42 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
         <div className={styles['column-long']}>
           <label>Genre</label>
           <div className={styles.select}>
-            <MultiSelectDropdown
-              placeholder="Select Genre"
-              selectorClassName={styles['select-wrapper']}
-              elements={['Crime', 'Documentary', 'Horror', 'Comedy']}
-              selected={selectedGenres}
-              onSelected={onGenreSelectedHandler}></MultiSelectDropdown>
+            <Controller
+              name={'genres'}
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <MultiSelectDropdown
+                  placeholder="Select Genre"
+                  selectorClassName={styles['select-wrapper']}
+                  elements={['Crime', 'Documentary', 'Horror', 'Comedy']}
+                  selected={value}
+                  onSelected={e => {
+                    const items = [...value];
+                    if (items.includes(e)) {
+                      onChange(items.filter(el => el !== e));
+                      return;
+                    } else {
+                      items.push(e);
+                    }
+                    onChange(items);
+                  }}></MultiSelectDropdown>
+              )}
+            />
+            {errors.genres?.type === 'required' && <p className={styles.error}>Select at least one genre.</p>}
           </div>
         </div>
         <div className={styles.column}>
           <label>Runtime</label>
           <div>
-            <input type="number" min={0} step={1} defaultValue={props.duration} placeholder="minutes"></input>
+            <input
+              type="number"
+              min={0}
+              step={1}
+              defaultValue={props.duration}
+              placeholder="minutes"
+              {...register('duration', { required: true })}></input>
+            {errors.duration?.type === 'required' && <p className={styles.error}>Duration is required.</p>}
           </div>
         </div>
       </div>
@@ -105,7 +167,11 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
         <div className={styles.description}>
           <label>Overview</label>
           <div>
-            <textarea defaultValue={props.description} name="description" placeholder="Description"></textarea>
+            <textarea
+              defaultValue={props.description}
+              placeholder="Description"
+              {...register('description', { required: true })}></textarea>
+            {errors.description && <p className={styles.error}>Overview is required.</p>}
           </div>
         </div>
       </div>
