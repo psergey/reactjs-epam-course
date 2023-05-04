@@ -76,7 +76,7 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
   const onFormResetHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     //setSelectedGenres(defaultValue.genres);
-    reset(defaultValue);
+    reset();
   };
 
   const onGenreSelectedHandler = (item: string) => {
