@@ -9,10 +9,11 @@ interface MovieProps {
   posterUrl: string;
   releaseDate?: Date;
   genres: string[];
+  onEdit(id: number): void;
   onClick(id: number): void;
 }
 
-const MovieItem: FC<MovieProps> = ({ id, title, posterUrl, releaseDate, genres, onClick }): ReactElement => {
+const MovieItem: FC<MovieProps> = ({ id, title, posterUrl, releaseDate, genres, onEdit, onClick }): ReactElement => {
   //const inputRef = useRef<ContextMenuType>(null);
   const [url, setUrl] = useState(posterUrl);
   const [isContextMenuOpened, setContextMenuOpened] = useState(false);
@@ -34,7 +35,13 @@ const MovieItem: FC<MovieProps> = ({ id, title, posterUrl, releaseDate, genres, 
       <div className={styles.poster}>
         <img src={url} alt={title} onError={() => setUrl(noPoster)}></img>
         <span className={styles.menu}>
-          <ContextMenu onOpenChanged={onOpenChangedHandler} isOpen={isContextMenuOpened}></ContextMenu>
+          <ContextMenu
+            onOpenChanged={onOpenChangedHandler}
+            isOpen={isContextMenuOpened}
+            onEdit={(): void => {
+              onEdit(id);
+              setContextMenuOpened(false);
+            }}></ContextMenu>
         </span>
       </div>
       <div className={styles.meta}>

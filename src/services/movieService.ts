@@ -63,6 +63,31 @@ export const createMovie = async (movie: Partial<Movie>): Promise<Movie> => {
   } as Movie;
 };
 
+export const updateMovie = async (movie: Partial<Movie>): Promise<Movie> => {
+  const response = await movieApiClient.put<MovieResponse>('/movies', {
+    id: movie.id,
+    title: movie.title,
+    poster_path: movie.posterUrl,
+    release_date: movie.releaseDate,
+    vote_average: movie.rating !== undefined ? +movie.rating : undefined,
+    overview: movie.description,
+    runtime: movie.duration !== undefined ? +movie.duration : undefined,
+    genres: movie.genres
+  } as WithId & MovieBase);
+  const item = response.data;
+
+  return {
+    id: item.id,
+    title: item.title,
+    posterUrl: item.poster_path,
+    releaseDate: item.release_date ? new Date(item.release_date) : undefined,
+    rating: item.vote_average,
+    duration: item.runtime,
+    description: item.overview,
+    genres: item.genres
+  } as Movie;
+};
+
 export const getMovies = async (query: MovieQuery): Promise<PageResponse<Movie>> => {
   const filter: MovieQueryParams = {
     searchBy: query.searchBy,

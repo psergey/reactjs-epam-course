@@ -27,9 +27,6 @@ const SearchMovie: FC = (): ReactElement => {
   };
 
   const onAddMovie = async (movie: Movie): Promise<void> => {
-    console.log('onAddMovie:');
-    console.log(movie);
-
     await createMovie(movie);
     navigate(-1);
   };

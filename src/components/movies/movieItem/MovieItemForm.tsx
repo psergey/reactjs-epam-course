@@ -1,4 +1,4 @@
-import ReactDOM, { FC, FormEvent, FormEventHandler, ReactElement, useState } from 'react';
+import ReactDOM, { FC, FormEvent, FormEventHandler, MouseEventHandler, ReactElement, useState } from 'react';
 import {
   useForm,
   Controller,
@@ -12,36 +12,50 @@ import MultiSelectDropdown from '../../dropdown/MultiSelectDropdown';
 import { Movie } from '../../../models/movie';
 
 interface MovieItem {
+  id?: number;
   name?: string;
   posterUrl?: string;
   releaseDate?: Date;
   duration?: number;
   rating?: number;
   description?: string;
-  genre?: string;
   genres?: string[];
+  //genres?: string[];
   onSubmit(movie: Partial<Movie>): void;
 }
 
 interface IFormInput {
-  title: string;
-  posterUrl: string;
-  releaseDate?: Date;
-  duration: number;
+  name?: string;
+  posterUrl?: string;
+  releaseDate?: string;
+  duration?: number;
   rating?: number;
-  genres: string[];
-  description: string;
+  genres?: string[];
+  description?: string;
 }
 
 const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const defaultValue = {
+    ...props,
+    releaseDate: props.releaseDate?.toJSON().split('T', 1)[0],
+    genres: props.genres ?? []
+  };
   const {
     register,
     handleSubmit,
     reset,
     control,
     formState: { errors }
-  } = useForm<IFormInput>({ defaultValues: { genres: [] } });
+  } = useForm<IFormInput>({
+    // values: {
+    //   ...props,
+    //   releaseDate: props.releaseDate?.toJSON().split('T', 1)[0],
+    //   genres: props.genres ?? []
+    // },
+    values: defaultValue,
+    defaultValues: defaultValue
+  });
 
   const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -51,12 +65,18 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
   };
 
   const onFormSubmit = (data: IFormInput): void => {
-    props.onSubmit(data);
+    props.onSubmit({
+      ...data,
+      id: defaultValue.id,
+      title: data.name,
+      releaseDate: data.releaseDate ? new Date(data.releaseDate) : undefined
+    });
   };
 
-  const onFormResetHandler = () => {
-    setSelectedGenres([]);
-    reset();
+  const onFormResetHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    //setSelectedGenres(defaultValue.genres);
+    reset(defaultValue);
   };
 
   const onGenreSelectedHandler = (item: string) => {
@@ -77,15 +97,15 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
         <div className={styles['column-long']}>
           <label>Title</label>
           <div>
-            <input defaultValue={props.name} placeholder="Title" {...register('title', { required: true })}></input>
-            {errors.title?.type === 'required' && <p className={styles.error}>Title is required.</p>}
+            <input placeholder="Title" {...register('name', { required: true })}></input>
+            {errors.name?.type === 'required' && <p className={styles.error}>Title is required.</p>}
           </div>
         </div>
         <div className={styles.column}>
           <label>Release Date</label>
           <div>
             <input
-              defaultValue={props.releaseDate?.toJSON().split('T', 1)[0]}
+              // defaultValue={props.releaseDate?.toJSON().split('T', 1)[0]}
               type="date"
               placeholder="Select Date"
               {...register('releaseDate')}></input>
@@ -97,7 +117,7 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
           <label>Movie Url</label>
           <div>
             <input
-              defaultValue={props.posterUrl}
+              // defaultValue={props.posterUrl}
               placeholder="https://"
               {...register('posterUrl', { required: true })}></input>
             {errors.posterUrl?.type === 'required' && <p className={styles.error}>Poster is required.</p>}
@@ -107,7 +127,7 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
           <label>Rating</label>
           <div>
             <input
-              defaultValue={props.rating}
+              // defaultValue={props.rating}
               type="number"
               // min={0}
               // max={10}
@@ -133,9 +153,9 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
                   placeholder="Select Genre"
                   selectorClassName={styles['select-wrapper']}
                   elements={['Crime', 'Documentary', 'Horror', 'Comedy']}
-                  selected={value}
+                  selected={value as any[]}
                   onSelected={e => {
-                    const items = [...value];
+                    const items = [...(value as any[])];
                     if (items.includes(e)) {
                       onChange(items.filter(el => el !== e));
                       return;
@@ -156,7 +176,7 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
               type="number"
               min={0}
               step={1}
-              defaultValue={props.duration}
+              // defaultValue={props.duration}
               placeholder="minutes"
               {...register('duration', { required: true })}></input>
             {errors.duration?.type === 'required' && <p className={styles.error}>Duration is required.</p>}
@@ -168,7 +188,7 @@ const MovieItemForm: FC<MovieItem> = (props: MovieItem): ReactElement => {
           <label>Overview</label>
           <div>
             <textarea
-              defaultValue={props.description}
+              // defaultValue={props.description}
               placeholder="Description"
               {...register('description', { required: true })}></textarea>
             {errors.description && <p className={styles.error}>Overview is required.</p>}

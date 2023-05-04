@@ -10,6 +10,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route path="/" element={<SearchMovie />}>
         <Route path="/new" element={<AddMovieForm />} />
+        <Route path="/:movieId/edit" element={<AddMovieForm />} />
       </Route>
       <Route path="/:movieId" loader={movieLoader} element={<MovieInformation />} />
     </Route>

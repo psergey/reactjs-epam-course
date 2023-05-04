@@ -4,10 +4,11 @@ import styles from './ContextMenu.module.css';
 
 interface ContextMenuProps {
   isOpen?: boolean;
+  onEdit(): void;
   onOpenChanged(): void;
 }
 
-const ContextMenu: FC<ContextMenuProps> = ({ isOpen = false, onOpenChanged }): ReactElement => {
+const ContextMenu: FC<ContextMenuProps> = ({ isOpen = false, onOpenChanged, onEdit }): ReactElement => {
   const onMenuClickHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
     onOpenChanged();
@@ -40,7 +41,13 @@ const ContextMenu: FC<ContextMenuProps> = ({ isOpen = false, onOpenChanged }): R
               </svg>
             </button>
           </li>
-          <li>Edit</li>
+          <li
+            onClick={(e: React.MouseEvent<HTMLLIElement>) => {
+              e.stopPropagation();
+              onEdit();
+            }}>
+            Edit
+          </li>
           <li>Delete</li>
         </ul>
       )}
