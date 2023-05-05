@@ -1,0 +1,59 @@
+@value colors: "../../styles/colors.css";
+@value pink, white from colors;
+
+button.back {
+  background: pink;
+  height: 57px;
+  min-width: 233px;
+  text-transform: capitalize;
+  border: 0px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+div.error {
+  display: flex;
+  flex: 2 0;
+  flex-direction: column;
+  margin: 0 1em;
+  position: relative;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+div.error h1 {
+  font-size: 4em;
+  font-weight: 500;
+  margin-bottom: 1.5vw;
+  color: white;
+  z-index: 1;
+}
+
+div.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-bottom: 2em;
+  z-index: 1;
+}
+
+div.content p {
+  font-size: 1.4em;
+  font-weight: 300;
+  color: white;
+  margin-bottom: 1vw;
+}
+
+div.content .buttons {
+  display: flex;
+  justify-content: center;
+}
