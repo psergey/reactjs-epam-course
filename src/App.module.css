@@ -71,38 +71,6 @@
   justify-content: space-between;
 }
 
-main,
-div.header,
-header > div.details {
-  padding: 0 59px 0 59px;
-}
-
-main {
-  background: dark;
-}
-
-header {
-  background: dark;
-  min-height: 385px;
-  margin-bottom: 10px;
-}
-
-header div.search {
-  background-image: url('./assets/header.jpg');
-  min-height: 385px;
-  height: 385px;
-}
-
-header div.header {
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  height: 100%;
-}
-
-header .details {
-  padding-bottom: 29px;
-}
-
 div.movies {
   padding-bottom: 73px;
 }
@@ -113,11 +81,6 @@ div.movie-count {
   font-weight: 400;
   text-align: left;
   padding: 27px 0 27px 0;
-}
-
-footer {
-  background: darkGray;
-  padding: 23px 0 23px 0;
 }
 
 button.addMovie {
@@ -158,8 +121,20 @@ button.search > span {
   mask: url('./assets/search.svg') no-repeat 50% 50%;
 }
 
-:global .bold {
-  font-weight: 600;
+header div.search {
+  background-image: url('../public/header.jpg');
+  min-height: 385px;
+  height: 385px;
+}
+
+header div.header {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  height: 100%;
+}
+
+header .details {
+  padding-bottom: 29px;
 }
 
 .top-row {
@@ -190,4 +165,14 @@ span.search-label {
   text-transform: uppercase;
   color: white;
   padding-bottom: 38px;
+}
+
+.main,
+.header {
+  background: dark;
+}
+
+.footer {
+  background: darkGray;
+  padding: 23px 0 23px 0;
 }

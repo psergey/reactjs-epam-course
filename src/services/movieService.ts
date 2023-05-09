@@ -128,7 +128,7 @@ export const getMovie = async (id: string): Promise<Movie> => {
     id: item.id,
     title: item.title,
     posterUrl: item.poster_path,
-    releaseDate: item.release_date ? new Date(item.release_date) : undefined,
+    releaseDate: item.release_date,
     rating: item.vote_average,
     duration: item.runtime,
     description: item.overview,

@@ -1,34 +1,49 @@
-import { FC, ReactElement } from 'react';
-import { useSearchParams, useNavigate, Outlet } from 'react-router-dom';
+import { FC, ReactElement, useCallback } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
 import Search from '../search/Search';
 import RouletteLabel from '../ui/RouletteLabel';
 import styles from '../../App.module.css';
 import useMovieSearch from '../../hooks/useMovieSearch';
 import { Movie } from '../../models/movie';
 import { createMovie } from '../../services/movieService';
+import { useRouter } from 'next/router';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const SearchMovie: FC = (): ReactElement => {
-  const [filterParams, setFilterParams] = useSearchParams();
-  const [search, setSearch] = useMovieSearch();
-  const navigate = useNavigate();
+  //const [filterParams, setFilterParams] = useSearchParams();
+  //const [search, setSearch] = useMovieSearch();
+  //const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   const onSearchMovieHandler = (searchQuery: string): void => {
-    setSearch(searchQuery);
-
-    filterParams.set('query', searchQuery);
-    setFilterParams(filterParams);
+    //setSearch(searchQuery);
+    // filterParams.set('query', searchQuery);
+    // setFilterParams(filterParams);
+    router.push(pathname + '?' + createQueryString('query', searchQuery));
   };
 
   const onAddMovieClickHandler = (): void => {
-    navigate({
-      pathname: '/new',
-      search: filterParams.toString()
-    });
+    // navigate({
+    //   pathname: '/new'
+    //   search: filterParams.toString()
+    // });
   };
 
   const onAddMovie = async (movie: Movie): Promise<void> => {
     await createMovie(movie);
-    navigate(-1);
+    //navigate(-1);
   };
 
   return (
@@ -46,7 +61,7 @@ const SearchMovie: FC = (): ReactElement => {
               <span className={styles['search-label']}>Find your movie</span>
             </div>
             <div>
-              <Search query={search} onSearch={onSearchMovieHandler}></Search>
+              <Search onSearch={onSearchMovieHandler}></Search>
             </div>
           </div>
         </div>

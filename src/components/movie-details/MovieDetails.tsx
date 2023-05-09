@@ -1,11 +1,11 @@
 import { FC, ReactElement } from 'react';
-import noPoster from '../../assets/no-poster.jpeg';
+import noPoster from '../../../public/no-poster.jpeg';
 import styles from './MovieDetails.module.css';
 
 interface MovieDetailsProps {
   title: string;
   posterUrl: string;
-  releaseDate?: Date;
+  releaseDate?: string;
   duration: number;
   rating?: number;
   description: string;
@@ -26,7 +26,7 @@ const MovieDetails: FC<MovieDetailsProps> = ({
   return (
     <div className={styles.container} data-testid="movie-details">
       <div className={styles.poster}>
-        <img src={posterUrl} alt={title} onError={e => (e.currentTarget.src = noPoster)}></img>
+        <img src={posterUrl} alt={title} onError={e => (e.currentTarget.src = noPoster.src)}></img>
       </div>
       <div className={styles.meta}>
         <div className={styles.firstLine}>
@@ -37,7 +37,7 @@ const MovieDetails: FC<MovieDetailsProps> = ({
         </div>
         <div className={`${styles.opacity}`}>{genres.slice(0, 3).join(', ')}</div>
         <div className={styles.time}>
-          <span>{releaseDate?.getFullYear() ?? 'N/A'}</span>
+          <span>{releaseDate !== undefined ? new Date(releaseDate).getFullYear() : 'N/A'}</span>
           <span>{durationText}</span>
         </div>
         <div className={`${styles.opacity}`}>{description}</div>

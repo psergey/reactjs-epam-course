@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import { useSearchParams, useNavigate, Outlet } from 'react-router-dom';
+//import { useSearchParams, useNavigate, Outlet } from 'react-router-dom';
 import { Movie } from '../../models/movie';
 import MovieItem from './movieItem/MovieItem';
 import styles from './Movies.module.css';
@@ -10,14 +10,14 @@ interface Props {
 }
 
 const Movies: FC<Props> = ({ movies, onSelected }): ReactElement => {
-  const [filterParams] = useSearchParams();
-  const navigate = useNavigate();
+  // const [filterParams] = useSearchParams();
+  // const navigate = useNavigate();
 
   const onItemEdit = (id: number) => {
-    navigate({
-      pathname: `/${id}/edit`,
-      search: filterParams.toString()
-    });
+    // navigate({
+    //   pathname: `/${id}/edit`,
+    //   search: filterParams.toString()
+    // });
   };
 
   const onAddMovie = (e: any): void => {

@@ -2,7 +2,7 @@ export type Movie = {
   id: number;
   title: string;
   posterUrl: string;
-  releaseDate?: Date;
+  releaseDate?: string;
   rating?: number;
   duration: number;
   description: string;
