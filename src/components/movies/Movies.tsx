@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import { useSearchParams, useNavigate, Outlet } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Movie } from '../../models/movie';
 import MovieItem from './movieItem/MovieItem';
 import styles from './Movies.module.css';
