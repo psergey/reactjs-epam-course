@@ -139,7 +139,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* 
+
 @font-face {
   font-family: 'Montserrat';
   src: local('Montserrat'), url(./assets/fonts/Montserrat-Regular.ttf) format('truetype');
@@ -191,4 +191,4 @@ table {
   font-family: 'Montserrat';
   font-weight: 900;
   src: local('Montserrat'), url(./assets/fonts/Montserrat-Black.ttf) format('truetype');
-} */
+}

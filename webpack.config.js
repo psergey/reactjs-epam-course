@@ -10,6 +10,9 @@ module.exports = (env, args) => {
       filename: 'bundle.[fullhash].js',
       path: path.resolve(__dirname, 'build')
     },
+    devServer: {
+      historyApiFallback: true
+    },
     devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval',
     module: {
       rules: [
@@ -33,11 +36,11 @@ module.exports = (env, args) => {
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/source'
+          type: 'asset/resource'
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,
-          type: 'asset/source'
+          type: 'asset/resource'
         }
       ]
     },
