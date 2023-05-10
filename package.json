@@ -55,7 +55,7 @@
       "<rootDir>/cypress/"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/jest-setup.ts"
+      "<rootDir>/src/setupTests.ts"
     ]
   },
   "dependencies": {
