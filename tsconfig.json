@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "typings.d.ts"],
+  "include": ["src", "typings.d.ts", "jest-setup.ts"],
   "exclude": ["build", "node_modules"]
 }

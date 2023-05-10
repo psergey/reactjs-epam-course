@@ -1,6 +1,8 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = (env, args) => {
   return {
@@ -11,9 +13,11 @@ module.exports = (env, args) => {
       path: path.resolve(__dirname, 'build')
     },
     devServer: {
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: 3000,
+      hot: true
     },
-    devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval',
+    devtool: isDevelopment ? 'eval' : 'source-map',
     module: {
       rules: [
         {
@@ -54,7 +58,8 @@ module.exports = (env, args) => {
         favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
         filename: 'index.html',
         manifest: path.resolve(__dirname, 'public', 'manifest.json')
-      })
+      }),
+      new BundleAnalyzerPlugin()
     ]
   };
 };

@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Movies: FC<Props> = ({ movies, onSelected }): ReactElement => {
+  var x = 0;
   const [filterParams] = useSearchParams();
   const navigate = useNavigate();
 
