@@ -39,7 +39,7 @@
     "build": "webpack --mode production",
     "test": "jest",
     "lint": "eslint --ext .tsx --ext .ts src/",
-    "lint:fix": "nmp rum lint -- --fix",
+    "lint:fix": "npm run lint -- --fix",
     "husky:prepare": "husky install",
     "e2e": "cypress run --browser chrome",
     "storybook": "start-storybook -p 6006",
