@@ -26,6 +26,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "lint-staged": "^13.2.2",
     "react-test-renderer": "^18.2.0",
     "style-loader": "^3.3.2",
     "typescript": "^5.0.4",
@@ -38,12 +39,18 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "test": "jest",
+    "test:noWatch": "npm run test -- --watchAll=false",
     "lint": "eslint --ext .tsx --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "husky:prepare": "husky install",
     "e2e": "cypress run --browser chrome",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -s public"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,jsx,tsx}": [
+      "eslint --fix"
+    ]
   },
   "jest": {
     "testEnvironment": "jsdom",
