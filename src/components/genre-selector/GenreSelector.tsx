@@ -9,6 +9,7 @@ interface GenreSelectorProps {
 
 const GenreSelector: FC<GenreSelectorProps> = ({ genres, currentGenre, onSelected }): ReactElement => {
   const [selectedGenre, setSelectedGenre] = useState(currentGenre);
+  const x = '';
 
   const onClickHandlder = (value: string): void => {
     onSelected(value);
