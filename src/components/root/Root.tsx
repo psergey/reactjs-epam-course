@@ -4,11 +4,13 @@ import GenreSelector from '../genre-selector/GenreSelector';
 import RouletteLabel from '../ui/RouletteLabel';
 import Movies from '../movies/Movies';
 import MovieSort from '../movie-sort/MovieSort';
-import { getMovie, getMovies } from '../../services/movieService';
+import { getMovie } from '../../services/movieService';
 import { Movie } from '../../models/movie';
-import { PageResponse, SortBy, isSortBy } from '../../models/api';
+import { SortBy, isSortBy } from '../../models/api';
 import styles from '../../App.module.css';
 import { MovieSearchContext } from '../../hooks/useMovieSearch';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchMovies } from '../movies/moviesSlice';
 
 const sortBy = ['Release Date', 'Name'];
 const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
@@ -22,8 +24,9 @@ export const movieLoader = async ({ params }: LoaderFunctionArgs): Promise<Movie
 };
 
 const Root: FC = (): ReactElement => {
+  const appDispatch = useAppDispatch();
+  const { movies } = useAppSelector(state => state.movies);
   const [filterParams, setFilterParams] = useSearchParams();
-  const [movies, setMovies] = useState<PageResponse<Movie>>();
   const [search, setSearch] = useState(filterParams.get('query') ?? undefined);
   const [sort, setSort] = useState<SortBy>(
     isSortBy(filterParams.get('sortBy') ?? '') ? (filterParams.get('sortBy') as SortBy) : 'title'
@@ -33,14 +36,14 @@ const Root: FC = (): ReactElement => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const items = await getMovies({
-        search: search,
-        searchBy: 'title',
-        sortBy: sort,
-        genresFilter: filter === 'All' ? [] : [filter]
-      });
-
-      setMovies(items);
+      await appDispatch(
+        fetchMovies({
+          search: search,
+          searchBy: 'title',
+          sortBy: sort,
+          genresFilter: filter === 'All' ? [] : [filter]
+        })
+      );
     };
 
     fetchData();
