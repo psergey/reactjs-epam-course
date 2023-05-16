@@ -1,5 +1,8 @@
 import { FC, ReactElement } from 'react';
+import { Provider } from 'react-redux';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+
+import { store } from './app/store';
 import Root, { movieLoader } from './components/root/Root';
 import MovieInformation from './components/root/MovieInformation';
 import SearchMovie from './components/root/SearchMovie';
@@ -23,7 +26,9 @@ const router = createBrowserRouter(
 const App: FC = (): ReactElement => {
   return (
     <>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </>
   );
 };
